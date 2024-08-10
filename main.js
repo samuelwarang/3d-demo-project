@@ -9,7 +9,7 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+document.getElementById('app').appendChild(renderer.domElement);
 
 // Add a directional light to the scene
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -33,12 +33,11 @@ loader.load('./assets/scene.gltf', function (gltf) {
 
 camera.position.z = 10; // Position the camera further back
 
-// Handle scroll event for model movement
+// Handle scroll event for model rotation
 window.addEventListener('scroll', () => {
     if (model) {
         const scrollY = window.scrollY;
-        model.position.x = -scrollY * 0.01; // Move left on scroll down
-        model.rotation.y = scrollY * 0.05;  // Rotate counter-clockwise on scroll down
+        model.rotation.y = scrollY * 0.005;  // Rotate counter-clockwise on scroll down
     }
 });
 
@@ -58,21 +57,7 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-
-animate()
-
-
-// Add hero text
-// const heroText = document.createElement('div');
-// heroText.style.position = 'absolute';
-// heroText.style.top = '50%';
-// heroText.style.left = '50%';
-// heroText.style.transform = 'translate(-50%, -50%)';
-// heroText.style.fontSize = '4rem';
-// heroText.style.fontFamily = 'Arial, sans-serif';
-// heroText.style.color = '#000'; // Black text color
-// heroText.textContent = '3D Demo';
-// document.body.appendChild(heroText);
+animate();
 
 // Handle window resize
 window.addEventListener('resize', () => {
